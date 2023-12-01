@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+      {
+        "source": "/customs",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/customs/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
