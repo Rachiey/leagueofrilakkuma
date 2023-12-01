@@ -2,9 +2,9 @@
   <div class="bodyPage">
     <div class="customsPage">
 
-      <button class="randomButton" @click="fetchRandomChampion" title="Click to randomize champion">Randomise Champion</button>
-      <button class="randomButton" @click="fetchRandomSummonerSpells" title="Click to randomize summoner spells">Randomise Summoner Spells</button>
-      <button class="randomButton" @click="fetchRandomChampionBuild" title="Click to randomize champion build">Randomise Champion Build</button>
+      <button class="randomChampButton" @click="fetchRandomChampion" title="Click to randomize champion">Randomise Champion</button>
+      <button class="randomSpellButton" @click="fetchRandomSummonerSpells" title="Click to randomize summoner spells">Randomise Summoner Spells</button>
+      <button class="randomBuildButton" @click="fetchRandomChampionBuild" title="Click to randomize champion build">Randomise Champion Build</button>
   
 
 
@@ -142,7 +142,7 @@
     width: 600px;
   }
 
-.randomButton {
+.randomChampButton {
 position: relative;
 z-index: 1;
 font-size: 23px;
@@ -160,7 +160,7 @@ border-width: 2px;
 font-family: 'BeaufortforLOLnormal';
 }
 
-.randomButton:hover {
+.randomChampButton:hover {
 text-shadow: 0 0 5px #ffffff80;
 box-shadow: 0 0 8px 0 #ffffff50;
 background: linear-gradient(to bottom, #1e2328, #433d2b);
@@ -168,11 +168,75 @@ cursor: pointer;
 transition: 0.1s;
 }
 
-.randomButton:active {
+.randomChampButton:active {
 text-shadow: none;
 box-shadow: none;
 }
   }
+
+  .randomSpellButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.randomSpellButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.randomSpellButton:active {
+text-shadow: none;
+box-shadow: none;
+}
+
+.randomBuildButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.randomBuildButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.randomBuildButton:active {
+text-shadow: none;
+box-shadow: none;
+}
+  
+
 
   @media (max-width: 769px) {
     .bodyPage {
@@ -195,7 +259,7 @@ box-shadow: none;
     background-color:  rgba(221, 221, 221, 0.3) ;
   }
 
-  .randomButton {
+  .randomChampButton {
 position: relative;
 z-index: 1;
 font-size: 23px;
@@ -213,7 +277,7 @@ border-width: 2px;
 font-family: 'BeaufortforLOLnormal';
 }
 
-.randomButton:hover {
+.randomChampButton:hover {
 text-shadow: 0 0 5px #ffffff80;
 box-shadow: 0 0 8px 0 #ffffff50;
 background: linear-gradient(to bottom, #1e2328, #433d2b);
@@ -221,12 +285,76 @@ cursor: pointer;
 transition: 0.1s;
 }
 
-.randomButton:active {
+.randomChampButton:active {
 text-shadow: none;
 box-shadow: none;
 }
   }
- 
+
+  .randomSpellButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.randomSpellButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.randomSpellButton:active {
+text-shadow: none;
+box-shadow: none;
+}
+
+.randomBuildButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.randomBuildButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.randomBuildButton:active {
+text-shadow: none;
+box-shadow: none;
+}
+  
+
+
   </style>
   
 
@@ -257,6 +385,7 @@ import { ref } from 'vue';
       const summonerSpells = reactive<SummonerSpell[]>([]);
       const championBuild = reactive<ChampionItem[]>([]);
       const isFetchingChampion = ref(false);
+      
   
       const fetchRandomChampion = async () => {
       if (isFetchingChampion.value) return; // If a fetch is already in progress, don't initiate another
