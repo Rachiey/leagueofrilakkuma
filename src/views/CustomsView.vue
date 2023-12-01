@@ -258,7 +258,7 @@ box-shadow: none;
   
       const fetchRandomChampion = async () => {
     try {
-      const championResponse = await fetch('http://localhost:3000/random-champion-details');
+      const championResponse = await fetch('https://rilakkuma.onrender.com/random-champion-details');
       const championData = await championResponse.json();
 
       championInfo.name = championData.name;
@@ -269,7 +269,7 @@ box-shadow: none;
   };
   const fetchRandomSummonerSpells = async () => {
     try {
-      const summonerSpellsResponse = await fetch('http://localhost:3000/random-summoner-spells');
+      const summonerSpellsResponse = await fetch('https://rilakkuma.onrender.com/random-summoner-spells');
       summonerSpells.splice(0, summonerSpells.length); // Clear the array
       summonerSpells.push(...(await summonerSpellsResponse.json()));
     } catch (error) {
@@ -281,7 +281,7 @@ box-shadow: none;
 
   const fetchRandomChampionBuild = async () => {
     try {
-      const championBuildResponse = await fetch('http://localhost:3000/random-build');
+      const championBuildResponse = await fetch('https://rilakkuma.onrender.com/random-build');
       const buildData = await championBuildResponse.json();
 
       championBuild.splice(0, championBuild.length); // Clear the array
