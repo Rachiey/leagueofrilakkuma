@@ -1,0 +1,27 @@
+
+.bm-burger-button {
+    position: fixed!important;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 20px;
+    cursor: pointer;
+    right: 15px;
+  position: absolute;
+  float: right!important;
+  right: 200px!important;
+  }
+
+  .slide-right {
+    background-color:red!important;
+  }
+
+
+button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #d50000;
+    transition: all 0.3s ease-in-out;
+  }
+  
