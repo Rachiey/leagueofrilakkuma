@@ -231,6 +231,7 @@ box-shadow: none;
   
 
 <script lang="ts">
+import { ref } from 'vue';
 
   import { onMounted, reactive } from 'vue';
   
@@ -255,8 +256,13 @@ box-shadow: none;
       const championInfo = reactive<ChampionInfo>({ name: null, iconUrl: null });
       const summonerSpells = reactive<SummonerSpell[]>([]);
       const championBuild = reactive<ChampionItem[]>([]);
+      const isFetchingChampion = ref(false);
   
       const fetchRandomChampion = async () => {
+      if (isFetchingChampion.value) return; // If a fetch is already in progress, don't initiate another
+
+    isFetchingChampion.value = true; // Set the fetching flag to true
+
     try {
       const championResponse = await fetch('https://rilakkuma.onrender.com/random-champion-details');
       const championData = await championResponse.json();
@@ -265,8 +271,11 @@ box-shadow: none;
       championInfo.iconUrl = championData.imageUrl;
     } catch (error) {
       console.error('Error fetching random champion:', error);
+    } finally {
+        isFetchingChampion.value = false; 
     }
   };
+
   const fetchRandomSummonerSpells = async () => {
     try {
       const summonerSpellsResponse = await fetch('https://rilakkuma.onrender.com/random-summoner-spells');
@@ -319,6 +328,7 @@ box-shadow: none;
   
       return {
         championInfo,
+        isFetchingChampion,
         summonerSpells,
         championBuild,
         fetchRandomChampion,
