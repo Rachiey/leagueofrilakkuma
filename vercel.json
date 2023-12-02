@@ -7,6 +7,14 @@
       {
         "source": "/customs/(.*)",
         "destination": "/index.html"
+      },
+      {
+        "source": "/arams",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/arams/(.*)",
+        "destination": "/index.html"
       }
     ]
   }
