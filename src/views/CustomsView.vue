@@ -640,6 +640,7 @@ import { ref } from 'vue';
         showSpellButton,
         showBuildButton,
         refreshPage,
+        
 
       };
     },
