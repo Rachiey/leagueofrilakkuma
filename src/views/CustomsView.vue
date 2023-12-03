@@ -14,7 +14,7 @@
             <p  class="image__description">
               {{ championInfo.name }}
             </p>
-            </div>
+          </div>
       
         </div>
       </div>
@@ -22,18 +22,19 @@
       <button v-if="showChampionButton" @click="fetchRandomChampion" class="randomChampButton">Randomise Champion</button>
 
               <!-- Summoner Spells -->
-              <div class ="summonerSpellsBox">
-                <div class="summonerSpells" v-if="summonerSpells.length">
-  <div v-for="(spell, index) in summonerSpells" :key="index" class="spellItem">
-    <div class="spellDetails">
-      <img v-if="spell.imageUrl" :src="spell.imageUrl" :alt="spell.name" :title="spell.name" />
-      <div class="image__overlay">
-        <p class="image__description">{{ spell.name }}</p>
+      <div class="summonerSpellsBox">
+        <div class="summonerSpells" v-if="summonerSpells.length">
+          <div v-for="(spell, index) in summonerSpells" :key="index" class="spellItem">
+            <div class="spellDetails">
+              <img v-if="spell.imageUrl" :src="spell.imageUrl" :alt="spell.name" :title="spell.name" />
+              <div class="image__overlay">
+                <p class="image__description">{{ spell.name }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-      </div>
+
 
       <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
 
@@ -97,7 +98,7 @@
     /* Style for text */
     margin: 5px 0;
   }
-  
+
   .buildDetails {
   position: relative; /* Ensure relative positioning */
 }
