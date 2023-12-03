@@ -39,25 +39,29 @@
       <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
 
         <!-- Champion Build Box in 3x3 Grid -->
-  <div class="championBuildBox">
-    <div class="championBuild" v-if="championBuild.length">
-  <div class="buildGrid">
-    <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
-      <div class="buildDetails">
-        <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
-        <div class="image__overlay">
-          <p class="image__description">{{ item.name }}</p>
-        </div>
+      <div class="championBuildBox">
+        <div class="championBuild" v-if="championBuild.length">
+          <div class="buildGrid">
+            <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
+              <div class="buildDetails">
+                <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
+                  <div class="image__overlay">
+                    <p class="image__description">{{ item.name }}</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+       </div>
       </div>
-    </div>
-  </div>
-</div>
-    </div>
-    <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
-  
 
+        <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
+      
+        <button class="refreshButton" @click="refreshPage">
+    <font-awesome-icon :icon="['fas', 'arrows-rotate']" style="color: #8b6c14" />
+  </button>
+
+    </div>
   </div>
-</div>
 </template>
   
   <style>
@@ -66,6 +70,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #132221;
+    padding: 10px;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 6px;
+    outline: 2px solid linear-gradient(to bottom, #1d4144, #162523);
+    outline-offset: -8px;
+    margin: 10px;
 
   }
 
@@ -90,9 +102,10 @@
   /* Define styles for img and p elements within .buildItem if needed */
   .buildItem img {
     /* Style for images */
-    max-width: 150px; /* Adjust size as needed */
+    max-width: 200px; /* Adjust size as needed */
     height: auto;
   }
+
 
   .buildItem p {
     /* Style for text */
@@ -112,11 +125,11 @@
   z-index: 0;
   margin: 50px;
   position: relative;
+  
 }
 
 
 .championBox img {
-  width: 100px; /* Adjust the size of the champion icon */
   height: auto; /* Maintain aspect ratio */
   position: relative; 
 }
@@ -132,9 +145,9 @@
 .frameOverlay {
   position: absolute;
   width: 200px; /* Adjust the width as needed */
-  height: 200px; /* Adjust the height as needed */
+  height: 220px; /* Adjust the height as needed */
   background-image: url('../assets/images/frame.png'); /* Replace 'path/to/frame.png' with your image path */
-  background-size: cover;
+  background-size:contain;
   background-position: center;
   z-index: 1; /* Ensure it's above the champion icon */
   top: 50%; /* Adjust top and left to center the overlay */
@@ -174,6 +187,18 @@
   transform: translateY(0);
 }
 
+.summonerSpellsBox{
+  background-color: #132221;
+    padding: 10px;
+    border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+    border-image-slice: 1;
+    border-width: 6px;
+    outline: 2px solid linear-gradient(to bottom, #1d4144, #162523);
+    outline-offset: -8px;
+    margin: 10px;
+
+}
+
 .summonerSpells {
   display:flex;
   font-family: 'BeaufortforLOLnormal';
@@ -191,7 +216,7 @@
   position: relative; /* Ensure relative positioning */
 }
 
-  @media (min-width: 770px) {
+  @media (min-width: 670px) {
     .about {
       min-height: 100vh;
       display: flex;
@@ -210,6 +235,38 @@
     background-color:  rgba(221, 221, 221, 0.3) ;
     height: 700px;
     width: 600px;
+  }
+
+  .refreshButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.refreshButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.refreshButton:active {
+text-shadow: none;
+box-shadow: none;
+}
   }
 
 .randomChampButton {
@@ -242,7 +299,7 @@ transition: 0.1s;
 text-shadow: none;
 box-shadow: none;
 }
-  }
+  
 
   .randomSpellButton {
 position: relative;
@@ -422,6 +479,37 @@ transition: 0.1s;
 text-shadow: none;
 box-shadow: none;
 }
+
+.refreshButton {
+position: relative;
+z-index: 1;
+font-size: 23px;
+font-weight: bold;
+letter-spacing: 1px;
+padding: 5px 15px; 
+margin: 10px;
+width: 350px;
+background: #1e2328;
+color: #cdbe91;
+box-shadow: inset 0 0 2px #000000;
+border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+border-image-slice: 1;
+border-width: 2px;
+font-family: 'BeaufortforLOLnormal';
+}
+
+.refreshButton:hover {
+text-shadow: 0 0 5px #ffffff80;
+box-shadow: 0 0 8px 0 #ffffff50;
+background: linear-gradient(to bottom, #1e2328, #433d2b);
+cursor: pointer;
+transition: 0.1s;
+}
+
+.refreshButton:active {
+text-shadow: none;
+box-shadow: none;
+}
   
 
 
@@ -429,11 +517,13 @@ box-shadow: none;
   
 
 <script lang="ts">
+
 import { ref } from 'vue';
 
 
   import { onMounted, reactive } from 'vue';
-  
+
+
   interface ChampionInfo {
     name: string | null;
     iconUrl: string | null;
@@ -459,6 +549,10 @@ import { ref } from 'vue';
       const showChampionButton = ref(true);
       const showSpellButton = ref(true);
       const showBuildButton = ref(true);
+
+      const refreshPage = () => {
+      window.location.reload();
+    };
       
   
       const fetchRandomChampion = async () => {
@@ -530,6 +624,8 @@ import { ref } from 'vue';
         if (championBuildButton) {
           championBuildButton.addEventListener('click', fetchRandomChampionBuild);
         }
+
+        
       });
   
       return {
@@ -543,6 +639,8 @@ import { ref } from 'vue';
         showChampionButton,
         showSpellButton,
         showBuildButton,
+        refreshPage,
+
       };
     },
   };
