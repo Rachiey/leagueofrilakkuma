@@ -22,7 +22,8 @@
       <button v-if="showChampionButton" @click="fetchRandomChampion" class="randomChampButton">Randomise Champion</button>
 
               <!-- Summoner Spells -->
-      <div class="summonerSpellsBox">
+      <!-- <div class="summonerSpellsBox hidden"> -->
+        <div v-if="showSummonerSpellsBox" class="summonerSpellsBox">
         <div class="summonerSpells" v-if="summonerSpells.length">
           <div v-for="(spell, index) in summonerSpells" :key="index" class="spellItem">
             <div class="spellDetails">
@@ -39,7 +40,7 @@
       <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
 
         <!-- Champion Build Box in 3x3 Grid -->
-      <div class="championBuildBox">
+      <div v-if="showChampionBuildBox"  class="championBuildBox">
         <div class="championBuild" v-if="championBuild.length">
           <div class="buildGrid">
             <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
@@ -57,7 +58,7 @@
         <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
       
         <button class="refreshButton" @click="refreshPage">
-    <font-awesome-icon :icon="['fas', 'arrows-rotate']" style="color: #8b6c14" />
+    <font-awesome-icon :icon="['fas', 'arrows-rotate']" />
   </button>
 
     </div>
@@ -65,6 +66,7 @@
 </template>
   
   <style>
+
     .championBuildBox {
     /* Add styles for the container of the 3x3 grid */
     display: flex;
@@ -237,54 +239,54 @@
     width: 600px;
   }
 
-  .refreshButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 350px;
-background: #1e2328;
-color: #cdbe91;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
+.refreshButton {
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 150px;
+  background: #1e2328;
+  color: #d9b854;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
 }
 
 .refreshButton:hover {
-text-shadow: 0 0 5px #ffffff80;
-box-shadow: 0 0 8px 0 #ffffff50;
-background: linear-gradient(to bottom, #1e2328, #433d2b);
-cursor: pointer;
-transition: 0.1s;
+  text-shadow: 0 0 5px #ffffff80;
+  box-shadow: 0 0 8px 0 #ffffff50;
+  background: linear-gradient(to bottom, #1e2328, #433d2b);
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .refreshButton:active {
-text-shadow: none;
-box-shadow: none;
+  text-shadow: none;
+  box-shadow: none;
 }
-  }
+  
 
 .randomChampButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 350px;
-background: #1e2328;
-color: #cdbe91;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 350px;
+  background: #1e2328;
+  color: #cdbe91;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
 }
 
 .randomChampButton:hover {
@@ -300,7 +302,7 @@ text-shadow: none;
 box-shadow: none;
 }
   
-
+  }
   .randomSpellButton {
 position: relative;
 z-index: 1;
@@ -332,23 +334,25 @@ text-shadow: none;
 box-shadow: none;
 }
 
-.randomBuildButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 350px;
-background: #1e2328;
-color: #cdbe91;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
-}
+
+  .randomBuildButton {
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 350px;
+  background: #1e2328;
+  color: #cdbe91;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
+  }
+
 
 .randomBuildButton:hover {
 text-shadow: 0 0 5px #ffffff80;
@@ -362,78 +366,76 @@ transition: 0.1s;
 text-shadow: none;
 box-shadow: none;
 }
-  
 
 
-  @media (max-width: 769px) {
-    .bodyPage {
-      display: flex;
-  justify-content: center;
-  align-items: center;
-    }
-
-  .customsPage {
-    /* Adjust styles for smaller screens */
-    height: auto;
-    width: 90%; /* Adjust the width to fit smaller screens */
-    padding: 20px; /* Add padding to give space around the button */
+@media (max-width: 769px) {
+  .bodyPage {
     display: flex;
-    flex-direction:column;
-  justify-content: center;
-  align-items: center;
-  height: 700px;
-    text-align: center; /* Center-align the button */
-    background-color:  rgba(221, 221, 221, 0.3) ;
+    justify-content: center;
+    align-items: center;
   }
 
-  .randomChampButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 350px;
-background: #1e2328;
-color: #cdbe91;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
+.customsPage {
+  /* Adjust styles for smaller screens */
+  width: 90%; /* Adjust the width to fit smaller screens */
+  padding: 20px; /* Add padding to give space around the button */
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center; /* Center-align the button */
+  background-color:  rgba(221, 221, 221, 0.3) ;
 }
+
+.randomChampButton {
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 300px;
+  background: #1e2328;
+  color: #cdbe91;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
+  }
 
 .randomChampButton:hover {
-text-shadow: 0 0 5px #ffffff80;
-box-shadow: 0 0 8px 0 #ffffff50;
-background: linear-gradient(to bottom, #1e2328, #433d2b);
-cursor: pointer;
-transition: 0.1s;
-}
-
-.randomChampButton:active {
-text-shadow: none;
-box-shadow: none;
-}
+  text-shadow: 0 0 5px #ffffff80;
+  box-shadow: 0 0 8px 0 #ffffff50;
+  background: linear-gradient(to bottom, #1e2328, #433d2b);
+  cursor: pointer;
+  transition: 0.1s;
   }
 
-  .randomSpellButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 350px;
-background: #1e2328;
-color: #cdbe91;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
+.randomChampButton:active {
+  text-shadow: none;
+  box-shadow: none;
+}
+  
+
+.randomSpellButton {
+  position: relative;
+  z-index: 1;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 300px;
+  background: #1e2328;
+  color: #cdbe91;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
 }
 
 .randomSpellButton:hover {
@@ -457,7 +459,7 @@ font-weight: bold;
 letter-spacing: 1px;
 padding: 5px 15px; 
 margin: 10px;
-width: 350px;
+width: 300px;
 background: #1e2328;
 color: #cdbe91;
 box-shadow: inset 0 0 2px #000000;
@@ -488,9 +490,9 @@ font-weight: bold;
 letter-spacing: 1px;
 padding: 5px 15px; 
 margin: 10px;
-width: 350px;
+width: 150px;
 background: #1e2328;
-color: #cdbe91;
+color: #cfb259;
 box-shadow: inset 0 0 2px #000000;
 border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
 border-image-slice: 1;
@@ -507,11 +509,11 @@ transition: 0.1s;
 }
 
 .refreshButton:active {
-text-shadow: none;
-box-shadow: none;
+  text-shadow: none;
+  box-shadow: none;
 }
   
-
+}
 
   </style>
   
@@ -549,9 +551,14 @@ import { ref } from 'vue';
       const showChampionButton = ref(true);
       const showSpellButton = ref(true);
       const showBuildButton = ref(true);
+      
+      const showSummonerSpellsBox = ref(false);
+      const showChampionBuildBox =ref(false)
 
       const refreshPage = () => {
       window.location.reload();
+
+
     };
       
   
@@ -576,10 +583,12 @@ import { ref } from 'vue';
 
   const fetchRandomSummonerSpells = async () => {
     showSpellButton.value = false;
+   
     try {
       const summonerSpellsResponse = await fetch('https://rilakkuma.onrender.com/random-summoner-spells');
       summonerSpells.splice(0, summonerSpells.length); // Clear the array
       summonerSpells.push(...(await summonerSpellsResponse.json()));
+      showSummonerSpellsBox.value = true;
     } catch (error) {
       console.error('Error fetching random summoner spells:', error);
     }
@@ -594,10 +603,13 @@ import { ref } from 'vue';
       const buildData = await championBuildResponse.json();
 
       championBuild.splice(0, championBuild.length); // Clear the array
+      
 
       // Ensure buildData is an array before spreading it
       if (Array.isArray(buildData)) {
         championBuild.push(...buildData);
+        showChampionBuildBox.value = true;
+   
       } else {
         console.error('Invalid champion build data:', buildData);
       }
@@ -640,6 +652,8 @@ import { ref } from 'vue';
         showSpellButton,
         showBuildButton,
         refreshPage,
+        showSummonerSpellsBox,
+        showChampionBuildBox,
         
 
       };
