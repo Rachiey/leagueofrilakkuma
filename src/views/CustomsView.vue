@@ -58,7 +58,7 @@
         <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
       
         <button class="refreshButton" @click="refreshPage">
-    <font-awesome-icon :icon="['fas', 'arrows-rotate']" />
+   Refresh Page <font-awesome-icon :icon="['fas', 'arrows-rotate']" />
   </button>
 
     </div>
