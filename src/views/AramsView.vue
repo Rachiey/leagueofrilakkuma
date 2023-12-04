@@ -1,31 +1,39 @@
 <template>
-  <div class = "championContainer">
-  <div>
-    <div class ="champTitle">Select a champion:</div>
-    <!-- Searchable dropdown menu -->
-    <div class="dropdown">
-      <input
-        v-model="searchText"
-        @input="filterChampions"
-        @click="toggleDropdown"
-        placeholder="Search Champions"
-        class ="inputChamp"
-      />
-      <div v-show="isDropdownOpen" class="dropdown-content">
-        <option
-          v-for="champion in filteredChampions"
-          :key="champion.id"
-          :value="champion.id"
-          @click="selectChampion(champion.id)"
-        >
-          {{ champion.name }}
+  <div class="championContainer">
+    <div>
+      <div class="champTitle">Select a champion:</div>
+      <!-- Searchable dropdown menu -->
+      <div class="dropdown">
+        <input
+          v-model="searchText"
+          @input="filterChampions"
+          @click="toggleDropdown"
+          placeholder="Search Champions"
+          class="inputChamp"
+        />
+        <div v-show="isDropdownOpen" class="dropdown-content">
+          <option
+            v-for="champion in filteredChampions"
+            :key="champion.id"
+            :value="champion.id"
+            @click="selectChampion(champion.id)"
+          
+          >
+            {{ champion.name }}
+          </option>
+        </div>
+      </div>
 
-        </option>
+      <!-- Display selected champion's information -->
+      <div v-if="selectedChampion" class="selectedChampion">
+        <div class="championName">{{ selectedChampion.name }}</div>
+        <img :src="selectedChampion.image" alt="Champion Image" v-if="selectedChampion.image" />
       </div>
     </div>
   </div>
-</div>
 </template>
+
+
 
   
   <style>
@@ -73,10 +81,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 500px;
   background-color: rgb(8, 51, 61);
   width: 50%;
-  margin: 0 auto; 
+  margin: 20px auto; 
+
 }
 
 .dropdown-content {
@@ -104,52 +113,68 @@
 .show {
   display: block;
 }
+
+.championName {
+  font-family: "beaufortforLOLnormal";
+  color: white;
+}
  
   </style>
+  <script lang="ts">
+  import axios from 'axios';
   
-<script lang="ts">
-export default {
-  data() {
-    return {
-      champions: [] as { id: string; name: string }[],
-      searchText: '', // Text input for search
-      selectedChampion: '', // Holds the selected champion ID
-      isDropdownOpen: false // Tracks dropdown visibility
-    };
-  },
-  computed: {
-    filteredChampions() {
-      // Filter champions based on search input
-      return this.champions.filter(champion =>
-        champion.name.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    }
-  },
-  methods: {
-    async fetchChampions() {
-      try {
-        // Fetch champions data from the API
-        const response = await fetch('https://rilakkuma.onrender.com/fetch-champion');
-        this.champions = await response.json();
-      } catch (error) {
-        console.error('Error fetching champions:', error);
-      }
+  export default {
+    data() {
+      return {
+        champions: [] as { id: string; name: string; image: string }[],
+        searchText: '',
+        selectedChampion: null as null | { id: string; name: string; image: string },
+        isDropdownOpen: false,
+      };
     },
-    filterChampions() {
-      // This method is triggered whenever the search text changes
-      // It updates the filtered list of champions based on the search input
-      // You can handle additional logic here if needed
+    computed: {
+      filteredChampions() {
+        return this.champions.filter((champion) =>
+          champion.name.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+      },
     },
-    toggleDropdown() {
-      this.isDropdownOpen = !this.isDropdownOpen;
+    methods: {
+      async fetchChampions() {
+        try {
+          const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/champion.json');
+          const championData = response.data.data;
+  
+          this.champions = Object.values(championData).map((champion: any) => ({
+            id: champion.key,
+            name: champion.name,
+            image: `https://ddragon.leagueoflegends.com/cdn/13.23.1/img/champion/${champion.image.full}`,
+          }));
+        } catch (error) {
+          console.error('Error fetching champions:', error);
+        }
+      },
+      filterChampions() {
+        // Implement filtering logic if needed
+      },
+      toggleDropdown() {
+        this.isDropdownOpen = !this.isDropdownOpen;
+      },
+      selectChampion(championId: string) {
+        const selectedChampion = this.champions.find((champion) => champion.id === championId);
+  
+        if (selectedChampion) {
+          this.selectedChampion = { ...selectedChampion };
+        } else {
+          this.selectedChampion = null;
+        }
+  
+        this.isDropdownOpen = false;
+      },
     },
-    selectChampion(championId:string) {
-      this.selectedChampion = championId;
-      this.isDropdownOpen = false;
-    }
-  },
-  created() {
-    this.fetchChampions(); // Fetch champions data when the component is created
-  }
-};
-</script>
+    created() {
+      this.fetchChampions();
+    },
+  };
+  </script>
+  
