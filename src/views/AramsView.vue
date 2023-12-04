@@ -17,7 +17,6 @@
             :key="champion.id"
             :value="champion.id"
             @click="selectChampion(champion.id)"
-          
           >
             {{ champion.name }}
           </option>
@@ -32,8 +31,6 @@
     </div>
   </div>
 </template>
-
-
 
   
   <style>
@@ -120,61 +117,64 @@
 }
  
   </style>
-  <script lang="ts">
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        champions: [] as { id: string; name: string; image: string }[],
-        searchText: '',
-        selectedChampion: null as null | { id: string; name: string; image: string },
-        isDropdownOpen: false,
-      };
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      champions: [] as { id: string; name: string; image: string }[],
+      searchText: '',
+      selectedChampion: null as null | { id: string; name: string; image: string },
+      isDropdownOpen: false,
+    };
+  },
+  computed: {
+    filteredChampions() {
+      return this.champions.filter((champion) =>
+        champion.name.toLowerCase().includes(this.searchText.toLowerCase())
+      );
     },
-    computed: {
-      filteredChampions() {
-        return this.champions.filter((champion) =>
-          champion.name.toLowerCase().includes(this.searchText.toLowerCase())
+  },
+  methods: {
+    async fetchChampions() {
+      try {
+        const response = await fetch(
+          'https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/champion.json'
         );
-      },
+        const data = await response.json();
+
+        // Assuming data.data contains champion information
+        const championData = data.data;
+
+        this.champions = Object.values(championData).map((champion: any) => ({
+          id: champion.key,
+          name: champion.name,
+          image: `https://ddragon.leagueoflegends.com/cdn/13.23.1/img/champion/${champion.image.full}`,
+        }));
+      } catch (error) {
+        console.error('Error fetching champions:', error);
+      }
     },
-    methods: {
-      async fetchChampions() {
-        try {
-          const response = await axios.get('https://ddragon.leagueoflegends.com/cdn/13.23.1/data/en_US/champion.json');
-          const championData = response.data.data;
-  
-          this.champions = Object.values(championData).map((champion: any) => ({
-            id: champion.key,
-            name: champion.name,
-            image: `https://ddragon.leagueoflegends.com/cdn/13.23.1/img/champion/${champion.image.full}`,
-          }));
-        } catch (error) {
-          console.error('Error fetching champions:', error);
-        }
-      },
-      filterChampions() {
-        // Implement filtering logic if needed
-      },
-      toggleDropdown() {
-        this.isDropdownOpen = !this.isDropdownOpen;
-      },
-      selectChampion(championId: string) {
-        const selectedChampion = this.champions.find((champion) => champion.id === championId);
-  
-        if (selectedChampion) {
-          this.selectedChampion = { ...selectedChampion };
-        } else {
-          this.selectedChampion = null;
-        }
-  
-        this.isDropdownOpen = false;
-      },
+    filterChampions() {
+      // Implement filtering logic if needed
     },
-    created() {
-      this.fetchChampions();
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
     },
-  };
-  </script>
-  
+    selectChampion(championId: string) {
+      const selectedChampion = this.champions.find((champion) => champion.id === championId);
+
+      if (selectedChampion) {
+        this.selectedChampion = { ...selectedChampion };
+      } else {
+        this.selectedChampion = null;
+      }
+
+      this.isDropdownOpen = false;
+    },
+  },
+  created() {
+    this.fetchChampions();
+  },
+};
+</script>
