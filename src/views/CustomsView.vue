@@ -10,7 +10,7 @@
             :src="championInfo.iconUrl"
             :alt="`Icon for ${championInfo.name}`"
           />
-          <div class ="image__overlay">
+          <div class ="champ__image__overlay">
             <p  class="image__description">
               {{ championInfo.name }}
             </p>
@@ -18,7 +18,8 @@
       
         </div>
       </div>
-   
+<!--    
+      <button  @click="fetchRandomChampion" class="randomChampButton">Randomise Champion</button> -->
       <button v-if="showChampionButton" @click="fetchRandomChampion" class="randomChampButton">Randomise Champion</button>
 
               <!-- Summoner Spells -->
@@ -37,25 +38,33 @@
       </div>
 
 
-      <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
+      <button @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
+      <!-- <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
+ -->
 
-        <!-- Champion Build Box in 3x3 Grid -->
-      <div v-if="showChampionBuildBox"  class="championBuildBox">
-        <div class="championBuild" v-if="championBuild.length">
-          <div class="buildGrid">
-            <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
-              <div class="buildDetails">
-                <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
-                  <div class="image__overlay">
-                    <p class="image__description">{{ item.name }}</p>
-                  </div>
+
+ <div v-if="showChampionBuildBox" class="championBuildBox">
+      <button @click="toggleShow" class="toggleOverlayButton">
+        {{ showBuildOverlay ? 'Hide Overlay' : 'Show Overlay' }}
+      </button>
+
+      <div class="championBuild" v-if="championBuild.length">
+        <div class="buildGrid">
+          <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
+            <div class="buildDetails">
+              <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
+              <div class="image__overlay">
+                <p class="image__description">{{ item.name }}</p>
               </div>
             </div>
           </div>
-       </div>
+        </div>
       </div>
+    </div>
 
-        <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
+
+        <button @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
+        <!-- <button v-if="showBuildButton" @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button> -->
       
         <button class="refreshButton" @click="refreshPage">
    Refresh Page <font-awesome-icon :icon="['fas', 'arrows-rotate']" />
@@ -147,7 +156,7 @@
 .frameOverlay {
   position: absolute;
   width: 200px; /* Adjust the width as needed */
-  height: 220px; /* Adjust the height as needed */
+  height: 210px; /* Adjust the height as needed */
   background-image: url('../assets/images/frame.png'); /* Replace 'path/to/frame.png' with your image path */
   background-size:contain;
   background-position: center;
@@ -156,6 +165,38 @@
   left: 50%; /* Adjust top and left to center the overlay */
   transform: translate(-50%, -50%); /* Center the overlay */
 }
+.champ__image__overlay {
+  position: absolute; /* Set the position to absolute */
+  top: 0;
+  left: 0;
+  width: 98%; /* Cover the entire parent */
+  height: 92%; /* Cover the entire parent */
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-family: 'BeaufortforLOLnormal';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index:1;
+  
+}
+
+.champ__image__overlay > * {
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+.champ__image__overlay:hover {
+  opacity: 1;
+}
+
+.champ__image__overlay:hover > * {
+  transform: translateY(0);
+}
+
 
 .image__overlay {
   position: absolute; /* Set the position to absolute */
@@ -230,31 +271,32 @@
   align-items: center;
     }
     .customsPage {
-      display: flex;
-      flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color:  rgba(221, 221, 221, 0.3) ;
-    height: 700px;
+    height: 780px;
     width: 600px;
   }
 
 .refreshButton {
   position: relative;
   z-index: 1;
-  font-size: 23px;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
   margin: 10px;
-  width: 150px;
+  width: 180px;
   background: #1e2328;
-  color: #d9b854;
+  color: #cdbe91;
   box-shadow: inset 0 0 2px #000000;
   border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
   border-image-slice: 1;
   border-width: 2px;
   font-family: 'BeaufortforLOLnormal';
+
 }
 
 .refreshButton:hover {
@@ -274,7 +316,7 @@
 .randomChampButton {
   position: relative;
   z-index: 1;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
@@ -306,7 +348,7 @@ box-shadow: none;
   .randomSpellButton {
 position: relative;
 z-index: 1;
-font-size: 23px;
+font-size: 20px;
 font-weight: bold;
 letter-spacing: 1px;
 padding: 5px 15px; 
@@ -338,7 +380,7 @@ box-shadow: none;
   .randomBuildButton {
   position: relative;
   z-index: 1;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
@@ -383,7 +425,7 @@ box-shadow: none;
   flex-direction:column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 800px;
   text-align: center; /* Center-align the button */
   background-color:  rgba(221, 221, 221, 0.3) ;
 }
@@ -391,7 +433,7 @@ box-shadow: none;
 .randomChampButton {
   position: relative;
   z-index: 1;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
@@ -423,7 +465,7 @@ box-shadow: none;
 .randomSpellButton {
   position: relative;
   z-index: 1;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
@@ -454,7 +496,7 @@ box-shadow: none;
 .randomBuildButton {
 position: relative;
 z-index: 1;
-font-size: 23px;
+font-size: 20px;
 font-weight: bold;
 letter-spacing: 1px;
 padding: 5px 15px; 
@@ -483,35 +525,36 @@ box-shadow: none;
 }
 
 .refreshButton {
-position: relative;
-z-index: 1;
-font-size: 23px;
-font-weight: bold;
-letter-spacing: 1px;
-padding: 5px 15px; 
-margin: 10px;
-width: 150px;
-background: #1e2328;
-color: #cfb259;
-box-shadow: inset 0 0 2px #000000;
-border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
-border-image-slice: 1;
-border-width: 2px;
-font-family: 'BeaufortforLOLnormal';
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 5px 15px; 
+  margin: 10px;
+  width: 180px;
+  background: #1e2328;
+  color: #cdbe91;
+  box-shadow: inset 0 0 2px #000000;
+  border-image: linear-gradient(to bottom, #c8aa6d, #7a5c29);
+  border-image-slice: 1;
+  border-width: 2px;
+  font-family: 'BeaufortforLOLnormal';
 }
 
 .refreshButton:hover {
-text-shadow: 0 0 5px #ffffff80;
-box-shadow: 0 0 8px 0 #ffffff50;
-background: linear-gradient(to bottom, #1e2328, #433d2b);
-cursor: pointer;
-transition: 0.1s;
+  text-shadow: 0 0 5px #ffffff80;
+  box-shadow: 0 0 8px 0 #ffffff50;
+  background: linear-gradient(to bottom, #1e2328, #433d2b);
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .refreshButton:active {
   text-shadow: none;
   box-shadow: none;
 }
+  
   
 }
 
@@ -549,9 +592,10 @@ import { ref } from 'vue';
       const championBuild = reactive<ChampionItem[]>([]);
       const isFetchingChampion = ref(false);
       const showChampionButton = ref(true);
-      const showSpellButton = ref(true);
-      const showBuildButton = ref(true);
+      // const showSpellButton = ref(true);
+      // const showBuildButton = ref(true);
       
+      const showBuildOverlay =ref(false);
       const showSummonerSpellsBox = ref(false);
       const showChampionBuildBox =ref(false)
 
@@ -561,7 +605,10 @@ import { ref } from 'vue';
 
     };
       
-  
+    const toggleShow = () => {
+      showBuildOverlay.value = !showBuildOverlay.value;
+    };
+
       const fetchRandomChampion = async () => {
         showChampionButton.value = false;
       if (isFetchingChampion.value) return; // If a fetch is already in progress, don't initiate another
@@ -582,7 +629,7 @@ import { ref } from 'vue';
   };
 
   const fetchRandomSummonerSpells = async () => {
-    showSpellButton.value = false;
+    // showSpellButton.value = false;
    
     try {
       const summonerSpellsResponse = await fetch('https://rilakkuma.onrender.com/random-summoner-spells');
@@ -597,7 +644,7 @@ import { ref } from 'vue';
   
 
   const fetchRandomChampionBuild = async () => {
-    showBuildButton.value = false;
+    // showBuildButton.value = false;
     try {
       const championBuildResponse = await fetch('https://rilakkuma.onrender.com/random-build');
       const buildData = await championBuildResponse.json();
@@ -649,13 +696,13 @@ import { ref } from 'vue';
         fetchRandomSummonerSpells,
         fetchRandomChampionBuild,
         showChampionButton,
-        showSpellButton,
-        showBuildButton,
+        // showSpellButton,
+        // showBuildButton,
         refreshPage,
         showSummonerSpellsBox,
         showChampionBuildBox,
-        
-
+        toggleShow,
+        showBuildOverlay
       };
     },
   };
