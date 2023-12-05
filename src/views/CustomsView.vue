@@ -81,6 +81,12 @@
 </template>
   
   <style>
+
+.image__description {
+  color: white;
+  font-size: 10px;
+}
+
   .switch {
   position: relative;
   display: inline-block;
