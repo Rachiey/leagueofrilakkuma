@@ -350,7 +350,7 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
     background-color:  rgba(221, 221, 221, 0.3) ;
-    height: 850px;
+    height: 100vh;
     width: 600px;
   }
 
@@ -361,7 +361,8 @@ input:checked + .slider:before {
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
-  margin: 8px;
+  margin: 10px;
+  margin-bottom: 20px;
   width: 180px;
   background: #1e2328;
   color: #cdbe91;
