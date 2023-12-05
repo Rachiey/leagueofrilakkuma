@@ -201,8 +201,6 @@ input:checked + .slider:before {
 }
 
   .championBox {
-  border: 2px solid #1e2328;
-  border-radius: 5px;
   font-family: 'BeaufortforLOLnormal';
   color:black;
   align-items: center;
@@ -216,6 +214,7 @@ input:checked + .slider:before {
 .championBox img {
   height: auto; /* Maintain aspect ratio */
   position: relative; 
+  margin-top:15px;
 }
 
 .championDetails {
@@ -227,6 +226,7 @@ input:checked + .slider:before {
 }
 
 .frameOverlay {
+  margin-top: 15px;
   position: absolute;
   width: 200px; /* Adjust the width as needed */
   height: 210px; /* Adjust the height as needed */
@@ -254,6 +254,7 @@ input:checked + .slider:before {
   opacity: 0;
   transition: opacity 0.25s;
   z-index:1;
+  margin-top:15px;
   
 }
 
@@ -349,18 +350,18 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
     background-color:  rgba(221, 221, 221, 0.3) ;
-    height: 780px;
+    height: 850px;
     width: 600px;
   }
 
 .refreshButton {
   position: relative;
   z-index: 1;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
-  margin: 10px;
+  margin: 8px;
   width: 180px;
   background: #1e2328;
   color: #cdbe91;
@@ -418,7 +419,8 @@ box-shadow: none;
 }
   
   }
-  .randomSpellButton {
+  
+.randomSpellButton {
 position: relative;
 z-index: 1;
 font-size: 20px;
@@ -538,11 +540,11 @@ box-shadow: none;
 .randomSpellButton {
   position: relative;
   z-index: 1;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
-  margin: 10px;
+  margin: 8px;
   width: 300px;
   background: #1e2328;
   color: #cdbe91;
@@ -569,11 +571,11 @@ box-shadow: none;
 .randomBuildButton {
 position: relative;
 z-index: 1;
-font-size: 20px;
+font-size: 15px;
 font-weight: bold;
 letter-spacing: 1px;
 padding: 5px 15px; 
-margin: 10px;
+margin: 8px;
 width: 300px;
 background: #1e2328;
 color: #cdbe91;
@@ -600,11 +602,11 @@ box-shadow: none;
 .refreshButton {
   position: relative;
   z-index: 1;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   letter-spacing: 1px;
   padding: 5px 15px; 
-  margin: 10px;
+  margin: 8px;
   width: 180px;
   background: #1e2328;
   color: #cdbe91;
