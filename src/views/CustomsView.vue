@@ -42,25 +42,25 @@
       <!-- <button v-if="showSpellButton" @click="fetchRandomSummonerSpells" class="randomSpellButton">Randomise Summoner Spells</button>
  -->
 
-
  <div v-if="showChampionBuildBox" class="championBuildBox">
-      <button @click="toggleShow" class="toggleOverlayButton">
-        {{ showBuildOverlay ? 'Hide Overlay' : 'Show Overlay' }}
-      </button>
+    <button @click="toggleShow" class="toggleOverlayButton">
+      {{ showBuildOverlay ? 'Hide Overlay' : 'Show Overlay' }}
+    </button>
 
-      <div class="championBuild" v-if="championBuild.length">
-        <div class="buildGrid">
-          <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
-            <div class="buildDetails">
-              <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
-              <div class="image__overlay">
-                <p class="image__description">{{ item.name }}</p>
-              </div>
+    <div class="championBuild" v-if="championBuild.length">
+      <div class="buildGrid">
+        <div v-for="(item, index) in championBuild.slice(0, 9)" :key="index" class="buildItem">
+          <div class="buildDetails">
+            <img v-if="item.image" :src="item.image" :alt="item.name" :title="item.name" />
+            <div :class="{ 'image__overlay': showBuildOverlay }">
+              <p class="image__description">{{ item.name }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
 
 
         <button @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
