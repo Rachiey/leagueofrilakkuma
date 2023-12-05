@@ -43,9 +43,7 @@
  -->
 
  <div v-if="showChampionBuildBox" class="championBuildBox">
-    <button @click="toggleShow" class="toggleOverlayButton">
-      {{ showBuildOverlay ? 'Hide Overlay' : 'Show Overlay' }}
-    </button>
+ 
 
     <div class="championBuild" v-if="championBuild.length">
       <div class="buildGrid">
@@ -61,6 +59,14 @@
     </div>
   </div>
 
+  <div v-if="showChampionBuildBox">
+  <div>
+    <label class="switch">
+      <input type="checkbox" v-model="showBuildOverlay" @click="toggleShow">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
 
 
         <button @click="fetchRandomChampionBuild" class="randomBuildButton">Randomise Champion Build</button>
@@ -75,6 +81,67 @@
 </template>
   
   <style>
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
     .championBuildBox {
     /* Add styles for the container of the 3x3 grid */
@@ -595,7 +662,7 @@ import { ref } from 'vue';
       // const showSpellButton = ref(true);
       // const showBuildButton = ref(true);
       
-      const showBuildOverlay =ref(false);
+      const showBuildOverlay =ref(true);
       const showSummonerSpellsBox = ref(false);
       const showChampionBuildBox =ref(false)
 
