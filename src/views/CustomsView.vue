@@ -1,7 +1,6 @@
 <template>
   <div class="bodyPage">
     <div class="customsPage">
-
       <div class="championBox" v-if="championInfo.name">
         <div class="championDetails">
           <div class="frameOverlay" v-if="championInfo.iconUrl"></div>
@@ -345,13 +344,17 @@ input:checked + .slider:before {
   align-items: center;
     }
     .customsPage {
+    /* Adjust styles for smaller screens */
+    height:100vh;
+    width: 35%; /* Adjust the width to fit smaller screens */
+    padding: 20px; /* Add padding to give space around the button */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color:  rgba(221, 221, 221, 0.3) ;
-    height: 100vh;
-    width: 600px;
+    min-height: 600px; /* Set a minimum height */
+    text-align: center; /* Center-align the button */
+    background-color: rgba(221, 221, 221, 0.3);
   }
 
 .refreshButton {
